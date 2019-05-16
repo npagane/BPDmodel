@@ -1,0 +1,25 @@
+\documentclass[12pt]{article}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newcommand{\ihat}{\boldsymbol{\hat{\textbf{\i}}}}
+\newcommand{\jhat}{\boldsymbol{\hat{\textbf{\j}}}}
+\graphicspath{ {./} }
+\usepackage[margin=1in]{geometry}
+\begin{document}
+
+\paragraph{Nicole Pagane $|$ 03/28/19 }
+
+\section*{Final Project: Modeling Exonic Chromatin Dynamics}
+
+\subsection*{Physical Problem}
+The DNA in a single cell spans about 2 meters if stretched; thus, it is necessary that DNA is compactly packaged into smaller units---the basis of which are called nucleosomes. A nucleosome is comprised of about 2 twists of DNA around small histone proteins, and this interplay with proteins compacts DNA into chromatin. Since DNA accessibility is required for the creation of all new proteins, it becomes evident why many protein regulatory mechanisms involve the alteration of chromatin---this form of regulation being a subset of epigenetics. \\ 
+\\ 
+To create new proteins, RNA polymerase (RNAP) needs to translocate along DNA (in this case, exonic genes). One would presume that the DNA should be easily accessible (i.e. not wrapped around histones to form a bulky nucleosome) to allow for RNAP passage; however, it has been experimentally shown that there are still many nucleosomes on exonic genes. While these nucleosomes are allowed to be shifted and modified during transcription, they still largely remain constituted on DNA throughout the process. However, in situations of very high rates of transcription, the nucleosomes become "damaged" and eventually dissociate from the DNA to allow for easier passage of RNAP. Thus, there is clearly a relationship between vitality/dysregulation of a gene and the retention of chromatin patterns to maintain some function. I am interested in modeling this behavior to see how different rates of transcription (i.e. different degrees of gene vitality/dysregulation) affect the overall chromatin dynamics of a gene and the energies associated with those states. 
+
+\subsection*{Numerical Solution}
+In order to model this chromatin system, I will have two main programs: transcription/perturbation and chromatin-remodeling/relaxation. The transcription program will use proposed mechanisms from literature to dictate how nucleosomes are treated upon the passage of RNAP; thus this will be a mostly deterministic biophysical effect with some degree of randomness. The chromatin-remodeling program will mimic the effects of nucleosome sliding to regain some energetic minimum of the gene. Thus, I will be writing a Markov Chain Monte Carlo (MCMC) tool to allow the system to explore different configurations that minimize the overall energy of the nucleosome positioning and constitution.\\
+\\
+After each time the transcription program is called (which models the passage of one RNAP through the gene), the remodeling MCMC will be successively called to allow for the relaxation of the perturbed system. The rate of transcription will be modeled through the number of iterations allowed during the relaxation MCMC. In this way, the effects of transcriptional rate and persistence on chromatin dynamics can be studied to better understand the relationship between cellular memory and regulation of different chromatin states.
+ 
+ \end{document}
