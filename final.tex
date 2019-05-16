@@ -106,11 +106,11 @@ a_w = r_w(p_w + p_bBW_w)p_P
 \subsubsection{Data fitting}
   At first, I wished to fit the model Broken Windows parameters to the data via Bayesian inference and MCMC. However, the data I am using is accumulated time-series data. Instead of having individual random variables take up different states, I have spatial data that results in only one datum per neighborhood (i.e. the number of drug arrests over a 5 year period). Thus, the construction of a likelihood function did not seem intuitive or at least in an analytic form. Thus, rather than maximizing the likelihood in a Bayesian interpretation to sample parameters in the MCMC, I try to minimize the least squared residuals (LSR) between the simulated data and the BPD data and then relate that in a pseudo Metroplis-Hastings fashion via:
   \begin{equation}
-  p_{acc} = \exp{[-\frac{LSR(\theta_0) - LSR(\theta)}{0.5LSR(\theta)}]}
+  p_{acc} = \exp{[-\frac{LSR(\theta_0) - LSR(\theta)}{LSR(\theta)T}]}
   \end{equation}
-  where the value inside the exponential is akin to a percent deviation for the proposed parameters $\theta_0$ from the current parameters $\theta$. \\
+  where the value inside the exponential is akin to a percent deviation for the proposed parameters $\theta_0$ from the current parameters $\theta$. $T$ is the temperature.\\
   \\
-  The proposal distributions were Gaussians with standard deviation 7.04 ($BW_b$) and 0.316 ($BW_w$). The MCMC was run for 200,000 iterations and the profiling showed that it took about 10 minutes on average to run. The parameters $BW_b$ and $BW_w$ were rotated every other iteration to try to sample the full span of the parameter spaces. The first half of the chain was thrown out as burn-in. The following plots offer a summary of the analysis:
+  The proposal distributions were Gaussians with standard deviation 7.04 ($BW_b$) and 0.316 ($BW_w$). The MCMC was run for 200,000 iterations and the profiling showed that it took about 10 minutes on average to run. Simulated annealing was implemented with an exponential cooling schedule with values of $T_0 = 5$ and $\tau = 5000$. The parameters $BW_b$ and $BW_w$ were rotated every other iteration to try to sample the full span of the parameter spaces. The first half of the chain was thrown out as burn-in. The following plots offer a summary of the analysis:
    \begin{figure}[!htb]
  \begin{minipage}{0.5\textwidth}
      \caption{Markov chain for parameter sampling}
@@ -133,9 +133,9 @@ Notice how sharp deviation from the preferred range results in a sharp increase 
   parameter & acceptance rate & 16th percentile & 50th percentile & 84th percentile \\
   \hline
  \hline
- $BW_b$ & 0.35 & 2.03 & 18.32 & 40.09\\
+ $BW_b$ & 0.35 & 0.693 & 1.795 & 25.40\\
  \hline
- $BW_w$ & 0.10 & 0.0132 & 0.0535 & 0.1044\\
+ $BW_w$ & 0.22 & 0.0258 & 0.0468 & 0.0764\\
  \hline
 \end{tabular}
 \end{center}
@@ -154,7 +154,7 @@ The following plot reconstructs the linearized ODE simulation of BPD policing co
  \end{figure}
  
 \subsection*{Conclusion}
- Through the above analysis, we see that BPD over-polices black citizens up to 18 times for drug crimes in predominantly white neighborhoods while white citizens are only marginally (0.05) over-policed in black neighborhoods. This brings into question once again whether a private police force should be created in a white majority neighborhood, where the officers are recruited from poorly trained BPD officers with Bloomberg-inspired policing tactics such as stop and frisk. \\
+ Through the above analysis, we see that BPD has a bias to over-police black citizens up to 38 ($\frac{BW_b}{BW_w}$) times more than it does for white citizens due to Broken Windows theory.This brings into question once again whether a private police force should be created in a white majority neighborhood, where the officers are recruited from poorly trained BPD officers with Bloomberg-inspired policing tactics such as stop and frisk. \\
  \\
  As a complete side-note, the above analysis was supported through version control via GitHub (project found at https://github.com/npagane/BPDmodel.git), documentation, and profiling.
 
