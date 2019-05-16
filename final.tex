@@ -10,7 +10,7 @@
 
 \paragraph{Nicole Pagane $|$ 05/16/19 $|$ Numerical Methods}
 
-\section*{Final Project: Modeling Baltimore Policing}
+\section*{Final Project: Simulating Baltimore Policing}
 
 \subsection*{Introduction}
 Baltimore is the 30th largest city in the United States yet houses the 8th largest police department in the nation. Oddly enough, the Baltimore Police Department (BPD) often complains of being sorely understaffed. How can we make sense of this discrepancy, especially with regard to recent events such as Freddie Gray?\\
@@ -32,7 +32,7 @@ From the BPD and census, I gathered arrest and population data. Through the use 
     \begin{minipage}{\textwidth}
      \caption{Raw Drug Arrests}
      \centering
-     \includegraphics[width=0.6\textwidth]{rawdrug.png}
+     \includegraphics[width=0.6\textwidth]{imgs/rawdrug.png}
    \end{minipage}\hfill
  \end{figure}\\
  This doesn't make much sense without understanding where Baltimore citizens live. Below I show the proportions of black and white residents in each neighborhood. The typical black butterfly and white L can be seen.
@@ -40,7 +40,7 @@ From the BPD and census, I gathered arrest and population data. Through the use 
     \begin{minipage}{\textwidth}
      \caption{Scaled Populations}
      \centering
-     \includegraphics[width=0.6\textwidth]{scalelive.png}
+     \includegraphics[width=0.6\textwidth]{imgs/scalelive.png}
    \end{minipage}\hfill
  \end{figure}\\
  Thus, we can now reconstruct drug arrests by their racial composition in each neighborhood. However, we see a spreading of the black butterfly and disappearance of the white L. 
@@ -48,7 +48,7 @@ From the BPD and census, I gathered arrest and population data. Through the use 
     \begin{minipage}{\textwidth}
      \caption{Scaled Drug Arrests}
      \centering
-     \includegraphics[width=0.6\textwidth]{scaledrug.png}
+     \includegraphics[width=0.6\textwidth]{imgs/scaledrug.png}
    \end{minipage}\hfill
  \end{figure}\\
 This means that in white-majority neighborhoods, black citizens are being arrested more for drug crimes than they exist in the population. To better visualize this, I have reproduced a plot that shows the ratio of racial drug arrests to racial population proportions for each neighborhood (log-scaled). 
@@ -56,7 +56,7 @@ This means that in white-majority neighborhoods, black citizens are being arrest
     \begin{minipage}{\textwidth}
      \caption{Ratio of Scaled Drug Arrests to Population}
      \centering
-     \includegraphics[width=0.6\textwidth]{logdrugpop.png}
+     \includegraphics[width=0.6\textwidth]{imgs/logdrugpop.png}
    \end{minipage}\hfill
  \end{figure}\\
  We now see the typical segregation patterns of Baltimore in both black and white over-policing rates in neighborhoods where they are in the minority. For black citizens, we see that along the white L, they are about 10 times over-policed---i.e. the black arrest proportion for these neighborhoods are 10 times more than the black residential proportion. You see similar behavior in the white over-arrest plot but it is not as spatially resolved in black neighborhoods as it is for black over-arrest in white-majority areas. We want to parameterize this difference in over-arrest rates to determine the racial bias in Broken Windows policing.
@@ -74,7 +74,7 @@ a_w = r_w(p_w + p_bBW_w)p_P
     \begin{minipage}{\textwidth}
      \caption{Drug Rates}
      \centering
-     \includegraphics[width=0.465\textwidth]{drugrates.png}
+     \includegraphics[width=0.465\textwidth]{imgs/drugrates.png}
    \end{minipage}\hfill
  \end{figure}\\
  Above, shows the BPD arrest data using linear regression to obtain the black and white arrest rates of 13.59 per day and 2.15 per day, respectively. Thus, we will use the average of these trends. \\
@@ -84,12 +84,12 @@ a_w = r_w(p_w + p_bBW_w)p_P
  \begin{minipage}{0.5\textwidth}
      \caption{Average of 40 Kinetic Monte Carlos}
      \centering
-     \includegraphics[width=\textwidth]{km.png}
+     \includegraphics[width=\textwidth]{imgs/km.png}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \caption{Linearized ODE Solution}
      \centering
-     \includegraphics[width=\textwidth]{rk.png}
+     \includegraphics[width=\textwidth]{imgs/rk.png}
    \end{minipage}\hfill
  \end{figure}
  
@@ -97,7 +97,7 @@ a_w = r_w(p_w + p_bBW_w)p_P
     \begin{minipage}{\textwidth}
      \caption{Converging Simulation Approaches}
      \centering
-     \includegraphics[width=0.6\textwidth]{kmandrk.png}
+     \includegraphics[width=0.6\textwidth]{imgs/kmandrk.png}
    \end{minipage}\hfill
  \end{figure}
  
@@ -115,12 +115,12 @@ a_w = r_w(p_w + p_bBW_w)p_P
  \begin{minipage}{0.5\textwidth}
      \caption{Markov chain for parameter sampling}
      \centering
-     \includegraphics[width=\textwidth]{mcmciter.png}
+     \includegraphics[width=\textwidth]{imgs/mcmciter.png}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \caption{Least Squared Residuals}
      \centering
-     \includegraphics[width=\textwidth]{mcmclike.png}
+     \includegraphics[width=\textwidth]{imgs/mcmclike.png}
    \end{minipage}\hfill
  \end{figure}
  
@@ -144,12 +144,12 @@ The following plot reconstructs the linearized ODE simulation of BPD policing co
  \begin{minipage}{0.5\textwidth}
      \caption{Simulation with Fit Parameters}
      \centering
-     \includegraphics[width=\textwidth]{mcmcmap.png}
+     \includegraphics[width=\textwidth]{imgs/mcmcmap.png}
    \end{minipage}\hfill
    \begin{minipage}{0.5\textwidth}
      \caption{Real BDP Data}
      \centering
-     \includegraphics[width=\textwidth]{logdrugpop.png}
+     \includegraphics[width=\textwidth]{imgs/logdrugpop.png}
    \end{minipage}\hfill
  \end{figure}
  
